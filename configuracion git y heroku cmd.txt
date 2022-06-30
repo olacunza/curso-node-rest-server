@@ -1,0 +1,14 @@
+<---------- NODE JS GIT ------------->
+
+git add .
+git commit -m "Nombre del commit"
+git push heroku main
+
+
+<---------- ACTUALIZAR VARIABLES EN HEROKU ---------->
+
+heroku config ---------> ver variables
+
+heroku config:set "NOMBRE DE LA VARIABLE"="VALOR"
+
+

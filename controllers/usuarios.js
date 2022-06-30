@@ -5,8 +5,7 @@ const bcryptjs = require('bcryptjs');
 
 const usuariosGet = async (req = request, res) => {
 
-    // const query = req.query;
-    // const { q, nombre = 'no Name', apikey, page = 10, limit } = req.query;
+    //const { q, nombre = 'no Name', apikey, page = 10, limit } = req.query;
     const { limite = 5, desde = 0 } = req.query;
 
     /*const usuarios = await Usuario.find({ estado: true })
@@ -23,7 +22,6 @@ const usuariosGet = async (req = request, res) => {
     ]);
 
     res.json({
-        //query
         msg: 'get API - Controlador',
         total,
         usuarios
@@ -35,7 +33,7 @@ const usuariosPut = async (req, res = response) => {
     const { id } = req.params;
     const { _id, password, google, correo, ...resto } = req.body;
 
-    //TODO validar contra BD
+    // TODO validar contra BD
     if (password) {
         //Encriptar la password
         const salt = bcryptjs.genSaltSync(5);
@@ -45,7 +43,6 @@ const usuariosPut = async (req, res = response) => {
     const usuario = await Usuario.findByIdAndUpdate(id, resto)
 
     res.json({
-        //ok: "true",
         msg: 'put API - Controller',
         usuario
     });
@@ -56,15 +53,14 @@ const usuariosPost = async (req, res = response) => {
     const { nombre, correo, password, rol } = req.body;
     const usuario = new Usuario({ nombre, correo, password, rol });
 
-    //Encriptar la password
+    // Encriptar la password
     const salt = bcryptjs.genSaltSync(5);
     usuario.password = bcryptjs.hashSync(password, salt);
 
-    //Guardar en la BD
+    // Guardar en la BD
     await usuario.save();
 
     res.json({
-        //ok: "true",
         msg: 'post API - Controlador',
         usuario
     });
